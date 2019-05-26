@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import TabNavigator from './navigation/TabNavigator'
+import SwitchNavigator from './navigation/SwitchNavigator'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import reducer from './reducers/index.js'
+
+const store = createStore(reducer)
 
  export default class App extends Component {
   render() {
     return (
-      <TabNavigator/>
+      <Provider store={store}>
+        <SwitchNavigator/>
+      </Provider>
+
     );
   }
 }

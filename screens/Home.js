@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import styles from '../styles'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { add, subtract } from '../actions/index'
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     count: 0
   }
@@ -20,10 +23,21 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>Home: {this.props.counter} </Text>
         <Text>How Many Apps are we going to Make: {this.state.count} </Text>
-        <Button style={styles.button} title="add" onPress={() => this.add()}/>
-        <Button style={styles.button} title="subtract" onPress={() => this.minus()}/>
+        <Button title="add" onPress={() => this.props.add()}/>
+        <Button title="subtract" onPress={() => this.props.subtract()}/>
       </View>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ add, subtract }, dispatch)
+}
+
+const mapStateToProps = (state) => {
+    return { counter: state }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

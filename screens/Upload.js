@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import styles from '../styles'
+import { connect } from 'react-redux'
 
-export default class Upload extends Component {
+
+class Upload extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Upload</Text>
+        <Text>Upload {this.props.counter}</Text>
       </View>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({}, dispatch)
+}
+
+const mapStateToProps = (state) => {
+    return { counter: state}
+}
+
+export default connect(mapStateToProps)(Upload);
