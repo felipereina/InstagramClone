@@ -4,12 +4,12 @@ import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateEmail, updatePassword, login } from '../actions/user'
-import firebase from 'firebase'
 
 class Login extends Component {
 
     login = () =>{
       this.props.login()
+      this.props.navigation.navigate('Home')
     }
 
   render() {
