@@ -6,7 +6,7 @@ import reducer from './reducers/index.js'
 import Logger from 'redux-logger'
 import thunkMiddleWare from 'redux-thunk'
 import firebase from './config/firebase'
-const middleWare = applyMiddleware(thunkMiddleWare, Logger)
+const middleWare = applyMiddleware(thunkMiddleWare)
 const store = createStore(reducer, middleWare)
 //console.disableYellowBox = true
 

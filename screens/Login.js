@@ -4,12 +4,17 @@ import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateEmail, updatePassword, login } from '../actions/user'
+import firebase from 'firebase'
+
 
 class Login extends Component {
 
-    login = () =>{
-      this.props.login()
-      this.props.navigation.navigate('Home')
+    componentDidMount = () =>{
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          this.props.navigation.navigate('Home')
+        }
+      })
     }
 
   render() {
@@ -28,7 +33,7 @@ class Login extends Component {
             placeholder='Password'
             secureTextEntry={true}
         />
-         <TouchableOpacity style={styles.button} onPress={() => this.login()}>
+         <TouchableOpacity style={styles.button} onPress={() => this.props.login()}>
             <Text>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Signup')}>
