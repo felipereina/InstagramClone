@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import SwitchNavigator from './navigation/SwitchNavigator'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import reducer from './reducers/index.js'
-
-const store = createStore(reducer)
+import Logger from 'redux-logger'
+import thunkMiddleWare from 'redux-thunk'
+import firebase from './config/firebase'
+const middleWare = applyMiddleware(thunkMiddleWare, Logger)
+const store = createStore(reducer, middleWare)
+//console.disableYellowBox = true
 
  export default class App extends Component {
   render() {

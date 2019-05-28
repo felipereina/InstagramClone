@@ -6,7 +6,10 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 const StackNavigator = createStackNavigator({
 
     Login:{ 
-        screen: Login,  
+        screen: Login, 
+        navigationOptions: {
+            header: null
+        } 
     },
     
     Signup:{ 
