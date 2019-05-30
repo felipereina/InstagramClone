@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import ENV from '../env'
+require('firebase/firestore')
 
 const config = {
     apiKey: ENV.apiKey,
@@ -10,7 +11,10 @@ const config = {
     messagingSenderId: ENV.messagingSenderId,
     appId: ENV.appId
 }
+//initialize firebase with all configuration keys
+firebase.initializeApp(config)
 
-const initialize = firebase.initializeApp(config)
+//export firestore database
+const db = firebase.firestore()
 
-export default initialize
+export default db

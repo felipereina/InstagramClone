@@ -10,7 +10,7 @@
     "@expo/samples": "2.1.1",
     "@shoutem/ui": "^0.23.16",
     "expo": "^32.0.0",
-    "firebase": "^6.0.4",
+    "firebase": "^6.0.2",
     "react": "16.6.3",
     "react-native": "^0.57.1",
     "react-navigation": "3.7.1",

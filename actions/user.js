@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import db from '../config/firebase'
 
 
 export const updateEmail = (email) => {
@@ -22,7 +23,6 @@ export const login = () =>{
     const {email, password} = getState().user
     try{
         const response = await firebase.auth().signInWithEmailAndPassword(email, password)
-        console.log(response)
         dispatch({type: 'LOGIN', payload: response.user})
     } catch(e){
         alert(e)
@@ -32,11 +32,27 @@ export const login = () =>{
 
 export const signup = () =>{
     return async (dispatch, getState) => {
-    const {email, password} = getState().user
     try{
+        const {email, password, username, bio} = getState().user
         const response = await firebase.auth().createUserWithEmailAndPassword(email, password)
-        console.log(response)
-        dispatch({type: 'SIGNUP', payload: response.user})
+        
+        //create a new user object with the state input from the Text fields and uid from firebase authentication method
+        if(response.user.uid){
+        const user = {
+            uid: response.user.uid,
+            email: email,
+            username: username,
+            bio: bio,
+            photo: '',
+            token: null
+        }
+        //stores the user information on firestore database and use uid created by firebase authentication
+        db.collection('user').doc(response.user.uid).set(user)
+        .then(() => { console.log("completed")})
+        .catch((e) => { console.log("failed", e)})
+
+        dispatch({type: 'SIGNUP', payload: user}) //dispatch the new user object insted of firebase object for global redux state handler
+    }
     } catch(e){
         alert(e)
     }
