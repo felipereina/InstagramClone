@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateEmail, updatePassword, login } from '../actions/user'
+import { updateEmail, updatePassword, login, getUser } from '../actions/user'
 import firebase from 'firebase'
 
 
@@ -12,7 +12,10 @@ class Login extends Component {
     componentDidMount = () =>{
       firebase.auth().onAuthStateChanged((user) => {
         if(user){
-          this.props.navigation.navigate('Home')
+          this.props.getUser(user.uid)
+          if(this.props.user){
+            this.props.navigation.navigate('Home')
+          }
         }
       })
     }
@@ -45,7 +48,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({updateEmail, updatePassword, login}, dispatch)
+    return bindActionCreators({updateEmail, updatePassword, login, getUser}, dispatch)
 }
 
 const mapStateToProps = (state) => {

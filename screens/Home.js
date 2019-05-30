@@ -4,7 +4,6 @@ import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { add, subtract } from '../actions/index'
-import firebase from 'firebase'
 
 
 class Home extends Component {
@@ -19,8 +18,6 @@ class Home extends Component {
         <Text>How Many Apps are we going to Make: {this.state.count} </Text>
         <Button title="add" onPress={() => this.props.add()}/>
         <Button title="subtract" onPress={() => this.props.subtract()}/>
-        <Button title="Logout" onPress={() => firebase.auth().signOut()}/>
-
       </View>
     );
   }

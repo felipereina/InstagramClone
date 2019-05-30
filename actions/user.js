@@ -23,7 +23,18 @@ export const login = () =>{
     const {email, password} = getState().user
     try{
         const response = await firebase.auth().signInWithEmailAndPassword(email, password)
-        dispatch({type: 'LOGIN', payload: response.user})
+        dispatch(getUser(response.user.uid))
+    } catch(e){
+        alert(e)
+    }
+    } 
+}
+
+export const getUser = (uid) =>{
+    return async (dispatch, getState) => {
+    try{
+        const user = await db.collection('user').doc(uid).get()
+        dispatch({type: 'LOGIN', payload: user.data()})
     } catch(e){
         alert(e)
     }
@@ -51,7 +62,7 @@ export const signup = () =>{
         .then(() => { console.log("completed")})
         .catch((e) => { console.log("failed", e)})
 
-        dispatch({type: 'SIGNUP', payload: user}) //dispatch the new user object insted of firebase object for global redux state handler
+        dispatch({type: 'LOGIN', payload: user}) //dispatch the new user object insted of firebase object for global redux state handler
     }
     } catch(e){
         alert(e)

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
+import firebase from 'firebase'
 
 
 class Profile extends Component {
@@ -9,17 +10,21 @@ class Profile extends Component {
     return (
       <View style={styles.container}>
         <Text>Profile</Text>
+        <Text>{this.props.user.username}</Text>
+        <Text>{this.props.user.bio}</Text>
+        <Text>{this.props.user.email}</Text>
+        <Button title="Logout" onPress={() => firebase.auth().signOut()}/>
       </View>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/* const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({}, dispatch)
 }
-
+ */
 const mapStateToProps = (state) => {
-    return { counter: state.counter}
+    return { user: state.user}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);
