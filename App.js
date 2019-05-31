@@ -8,7 +8,7 @@ import thunkMiddleWare from 'redux-thunk'
 import firebase from './config/firebase'
 const middleWare = applyMiddleware(thunkMiddleWare)
 const store = createStore(reducer, middleWare)
-//console.disableYellowBox = true
+console.disableYellowBox = true
 
  export default class App extends Component {
   render() {

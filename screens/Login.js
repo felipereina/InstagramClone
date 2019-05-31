@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateEmail, updatePassword, login, getUser } from '../actions/user'
+import { updateEmail, updatePassword, login, getUser, facebookLogin } from '../actions/user'
 import firebase from 'firebase'
 
 
@@ -13,7 +13,7 @@ class Login extends Component {
       firebase.auth().onAuthStateChanged((user) => {
         if(user){
           this.props.getUser(user.uid)
-          if(this.props.user){
+          if(this.props.user != null){
             this.props.navigation.navigate('Home')
           }
         }
@@ -39,6 +39,9 @@ class Login extends Component {
          <TouchableOpacity style={styles.button} onPress={() => this.props.login()}>
             <Text>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.facebookbutton} onPress={() => this.props.facebookLogin()}>
+            <Text>Facebook Login</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Signup')}>
             <Text>SignUp</Text>
         </TouchableOpacity>
@@ -48,7 +51,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({updateEmail, updatePassword, login, getUser}, dispatch)
+    return bindActionCreators({updateEmail, updatePassword, login, facebookLogin, getUser}, dispatch)
 }
 
 const mapStateToProps = (state) => {

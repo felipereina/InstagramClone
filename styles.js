@@ -16,6 +16,17 @@ export default styles = StyleSheet.create({
       borderRadius: 5,
       width: 200
     },
+    facebookbutton: {
+      backgroundColor: '#3b5998',
+      color: 'white',
+      marginTop: 20,
+      paddingVertical: 10,
+      alignItems: 'center',
+      borderColor: '#3b5998',
+      borderWidth: 1,
+      borderRadius: 5,
+      width: 200
+    },
     border: {
       width:'85%',
       margin: 10,

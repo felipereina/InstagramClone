@@ -4,6 +4,9 @@
     "slug": "instagram",
     "privacy": "public",
     "sdkVersion": "32.0.0",
+    "facebookScheme": "fb304682660450298", 
+    "FacebookAppID": "304682660450298",
+    "FacebookDisplayName": "testApp",
     "platforms": [
       "ios",
       "android"
@@ -15,6 +18,9 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "facebook": {
+      "appId": "304682660450298"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
