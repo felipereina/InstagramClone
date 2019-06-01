@@ -27,3 +27,20 @@ export const uploadPost = () =>{
     }
     } 
 }
+
+export const getPosts = () =>{
+    return async (dispatch) => {
+    try{
+        const posts = await db.collection('post').get() //get all the posts'
+        
+        let array = []
+        posts.forEach((post) => {
+            array.push(post.data())
+        })
+
+        dispatch({type: 'GET_POSTS', payload: array})
+    } catch(e){
+        alert(e)
+    }
+    } 
+}

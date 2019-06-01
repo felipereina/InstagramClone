@@ -7,11 +7,12 @@ import Search from '../screens/Search'
 import Post from '../screens/Post'
 import Profile from '../screens/Profile'
 import Activity from '../screens/Activity'
+import { HomeNavigator, SearchNavigator, ProfileNavigator, ActivityNavigator, PostNavigator } from './StackNavigator'
 
 
 const TabNavigator = createBottomTabNavigator({
   Home:{ 
-      screen: Home,
+      screen: HomeNavigator,
       navigationOptions: {
           tabBarLabel: ' ',
           tabBarIcon: () => (
@@ -20,7 +21,7 @@ const TabNavigator = createBottomTabNavigator({
       }  
     },
   Search: { 
-    screen: Search,
+    screen: SearchNavigator,
     navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: ({focused}) => (
@@ -29,7 +30,7 @@ const TabNavigator = createBottomTabNavigator({
     }  
   },
   Post: { 
-    screen: Post,
+    screen: PostNavigator,
     navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: ({focused}) => (
@@ -38,7 +39,7 @@ const TabNavigator = createBottomTabNavigator({
     }  
   },
   Activity: { 
-    screen: Activity,
+    screen: ActivityNavigator,
     navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: ({focused}) => (
@@ -47,7 +48,7 @@ const TabNavigator = createBottomTabNavigator({
     }  
   },
   Profile: { 
-    screen: Profile,
+    screen: ProfileNavigator,
     navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: () => (

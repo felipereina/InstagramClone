@@ -8,7 +8,7 @@ class Upload extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Upload {this.props.counter}</Text>
+        <Text>Upload</Text>
       </View>
     );
   }
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-    return { counter: state.counter}
+    return {}
 }
 
 export default connect(mapStateToProps)(Upload);

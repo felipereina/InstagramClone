@@ -1,34 +1,41 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Image, ScrollView, FlatList } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { add, subtract } from '../actions/index'
+import { getPosts } from '../actions/post'
 
 
 class Home extends Component {
-  state = {
-    count: 0
+  
+  componentDidMount= () =>{
+    this.props.getPosts();
   }
 
   render() {
+    if(this.props.post === null) return null
     return (
       <View style={styles.container}>
-        <Text>Home: {this.props.counter} </Text>
-        <Text>How Many Apps are we going to Make: {this.state.count} </Text>
-        <Button title="add" onPress={() => this.props.add()}/>
-        <Button title="subtract" onPress={() => this.props.subtract()}/>
+        <FlatList
+          data = {this.props.post.feed}
+          renderItem = {({item}) => (
+            <View>
+                <Image style={styles.postPhoto} source={{uri: item.postPhoto}} />
+                <Text>{item.postDescription}</Text>
+            </View>
+          )}
+        />
       </View>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ add, subtract }, dispatch)
+    return bindActionCreators({ getPosts }, dispatch)
 }
 
 const mapStateToProps = (state) => {
-    return { counter: state.counter }
+    return { post: state.post }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

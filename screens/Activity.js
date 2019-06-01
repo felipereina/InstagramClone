@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-    return { counter: state}
+    return {}
 }
 
 export default connect(mapStateToProps)(Activity);

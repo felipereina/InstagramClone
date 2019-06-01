@@ -1,16 +1,5 @@
 import { combineReducers } from "redux";
 
-const counter = (state = 50, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
-
 const user = (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN':
@@ -28,17 +17,18 @@ const user = (state = {}, action) => {
   }
 }
 
-const post = (state = {}, action) => {
+const post = (state = null, action) => {
   switch (action.type) {
     case 'UPDATE_DESCRIPTION':
       return {...state, description: action.payload}
+    case 'GET_POSTS':
+      return {...state, feed: action.payload}
     default:
       return state
   }
 }
 
 export default combineReducers({
-  counter,
   user, 
   post
 })
