@@ -28,7 +28,17 @@ const user = (state = {}, action) => {
   }
 }
 
+const post = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_DESCRIPTION':
+      return {...state, description: action.payload}
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   counter,
-  user
+  user, 
+  post
 })

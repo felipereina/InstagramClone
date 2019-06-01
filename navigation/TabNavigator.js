@@ -4,7 +4,7 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../screens/Home'
 import Search from '../screens/Search'
-import Upload from '../screens/Upload'
+import Post from '../screens/Post'
 import Profile from '../screens/Profile'
 import Activity from '../screens/Activity'
 
@@ -28,8 +28,8 @@ const TabNavigator = createBottomTabNavigator({
           )
     }  
   },
-  Upload: { 
-    screen: Upload,
+  Post: { 
+    screen: Post,
     navigationOptions: {
         tabBarLabel: ' ',
         tabBarIcon: ({focused}) => (

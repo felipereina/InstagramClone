@@ -25,13 +25,13 @@ class Login extends Component {
       <View style={styles.container}>
         <TextInput 
             style={styles.border}
-            value={this.props.user}
+            value={this.props.user.email}
             onChangeText={input => this.props.updateEmail(input)}
             placeholder='Email'
         />
         <TextInput
             style={styles.border} 
-            value={this.props.user}
+            value={this.props.user.password}
             onChangeText={input => this.props.updatePassword(input)}
             placeholder='Password'
             secureTextEntry={true}

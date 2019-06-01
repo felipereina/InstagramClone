@@ -40,16 +40,10 @@ export const facebookLogin = () =>{
 
         // Sign in with credential from the Facebook user.
             const response = await firebase.auth().signInWithCredential(credential)
-            console.log('>>response: ',response)
-            console.log('>>response.user : ',response.user)
-            console.log('>>response.user.uid : ',response.user.uid)
-            console.log('>>response.additionalUserInfo.isNewUser : ',response.additionalUserInfo.isNewUser)
 
             //check if the user already exists
             const user = await db.collection('user').doc(response.user.uid).get()
-            console.log('>>user: ',user)
              if(response.additionalUserInfo.isNewUser){
-                console.log('>>ENTROU!!! ')
                     const user = {
                         uid: response.user.uid,
                         email: response.user.email,
