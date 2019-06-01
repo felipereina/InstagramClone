@@ -4,6 +4,7 @@ import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPosts } from '../actions/post'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 class Home extends Component {
@@ -20,8 +21,23 @@ class Home extends Component {
           data = {this.props.post.feed}
           renderItem = {({item}) => (
             <View>
-                <Image style={styles.postPhoto} source={{uri: item.postPhoto}} />
-                <Text>{item.postDescription}</Text>
+              <View style={[styles.row, styles.center]}>
+                <View style={[styles.row, styles.center]}>
+                  <Image style={styles.roundImage} source={{uri: item.photo}} />
+                  <Text>{item.username}</Text>
+                </View>
+                <Ionicons style={{margin: 5}} name='ios-flag' size={25}/>
+              </View>
+              <Image style={styles.postPhoto} source={{uri: item.postPhoto}} />
+              
+              <View style={styles.row}>
+                <Ionicons style={{margin: 5}} name='ios-heart' size={25}/>
+                <Ionicons style={{margin: 5}} name='ios-chatbubbles' size={25}/>
+                <Ionicons style={{margin: 5}} name='ios-send' size={25}/>
+              </View>
+
+              <Text>{item.postDescription}</Text>
+
             </View>
           )}
         />
