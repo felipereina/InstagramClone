@@ -5,9 +5,11 @@ import SearchScreen from '../screens/Search'
 import PostScreen from '../screens/Post'
 import ProfileScreen from '../screens/Profile'
 import ActivityScreen from '../screens/Activity'
+import MapScreen from '../screens/Map'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Image, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import styles from '../styles';
 
 
 export const HomeNavigator = createAppContainer(createStackNavigator(
@@ -28,6 +30,18 @@ export const HomeNavigator = createAppContainer(createStackNavigator(
             })
         },
 
+        Map:{
+            screen: MapScreen, 
+            navigationOptions: ({navigation}) => ({
+                title: 'Map',
+                headerLeft: (
+                    <TouchableOpacity onPress={()=> navigation.goBack()}>
+                        <Ionicons style={styles.icon} name={'ios-arrow-back'} size={30}/>
+                    </TouchableOpacity>
+                )
+            })        
+        },
+
         Camera:{ 
             screen: CameraScreen, 
             navigationOptions: {
@@ -36,6 +50,20 @@ export const HomeNavigator = createAppContainer(createStackNavigator(
         }
     }
 ))
+
+HomeNavigator.navigationOptions = ({navigation}) => {
+    let tabBarVisible = true
+    if(navigation.state.routes.some(route => route.routeName === 'Camera')){
+        tabBarVisible = false
+    }
+    if(navigation.state.routes.some(route => route.routeName === 'Map')){
+        tabBarVisible = false
+    }
+    return {
+        tabBarVisible
+    }
+}
+
 
 export const SearchNavigator = createAppContainer(createStackNavigator(
     {

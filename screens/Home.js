@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView, FlatList } from 'react-native';
+import { Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -11,6 +11,11 @@ class Home extends Component {
   
   componentDidMount= () =>{
     this.props.getPosts();
+  }
+
+  navigateMap = (item) => {
+    this.props.navigation.navigate('Map',
+     { location: item.postLocation })
   }
 
   render() {
@@ -25,6 +30,11 @@ class Home extends Component {
                 <View style={[styles.row, styles.center]}>
                   <Image style={styles.roundImage} source={{uri: item.photo}} />
                   <Text>{item.username}</Text>
+                  <View>
+                    <TouchableOpacity onPress={() => this.navigateMap(item)}>
+                      <Text>{item.postLocation ? item.postLocation.name : null}</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
                 <Ionicons style={{margin: 5}} name='ios-flag' size={25}/>
               </View>

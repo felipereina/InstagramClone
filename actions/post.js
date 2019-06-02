@@ -6,6 +6,10 @@ export const updateDescription = (input) => {
     return {type: 'UPDATE_DESCRIPTION', payload: input}
 }
 
+export const updateLocation = (input) => {
+    return {type: 'UPDATE_LOCATION', payload: input}
+}
+
 export const updatePhoto = (input) => {
     return {type: 'UPDATE_PHOTO', payload: input}
 }
@@ -21,7 +25,8 @@ export const uploadPost = () =>{
                 photo: user.photo,
                 username: user.username,
                 postDescription: post.description,
-                postPhoto: post.photo
+                postPhoto: post.photo,
+                postLocation: post.location
             }
 
         db.collection('post').doc(id).set(upload)
