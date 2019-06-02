@@ -6,17 +6,23 @@ import { bindActionCreators } from 'redux'
 import { updateDescription, uploadPost } from '../actions/post'
 
 class Post extends Component {
+
+  post = () => {
+    this.props.uploadPost()
+    this.props.navigation.navigate('Home')
+  }
+
   render() {
     return (
       <View style={styles.container}>
-          <Image style={styles.postPhoto} source={{uri: 'https://firebasestorage.googleapis.com/v0/b/instagram-clone-fa3ee.appspot.com/o/jobim%20e%20joao%20gilberto.jpg?alt=media&token=d49e4993-176c-48d3-bcb3-704c1a5ec9ea'}}/> 
+          <Image style={styles.postPhoto} source={{uri: this.props.post.photo}}/> 
          <TextInput 
             style={styles.border}
             value={this.props.post.description}
             onChangeText={input => this.props.updateDescription(input)}
             placeholder='Description'
         />
-          <TouchableOpacity style={styles.button} onPress={this.props.uploadPost}>
+          <TouchableOpacity style={styles.button} onPress={this.post}>
             <Text>Post</Text>
         </TouchableOpacity>
       </View>

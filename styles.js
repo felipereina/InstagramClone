@@ -55,5 +55,13 @@ export default styles = StyleSheet.create({
       padding: 5,
       margin: 5
 
+    },
+    cameraButton: {
+      height: 100, 
+      width: 100,
+      borderRadius: 50,
+      alignSelf: 'center',
+      backgroundColor: '#fff',
+      marginBottom: 50
     }
   });

@@ -1,30 +1,34 @@
 import firebase from 'firebase'
 import db from '../config/firebase'
+import uuid from 'uuid'
 
-export const updateDescription = (text) => {
-    return {type: 'UPDATE_DESCRIPTION', payload: text}
+export const updateDescription = (input) => {
+    return {type: 'UPDATE_DESCRIPTION', payload: input}
+}
+
+export const updatePhoto = (input) => {
+    return {type: 'UPDATE_PHOTO', payload: input}
 }
 
 export const uploadPost = () =>{
     return async (dispatch, getState) => {
-    try{
-        const { post, user } = getState()
-        
-        const upload = {
-            uid: user.uid,
-            photo: user.photo,
-            username: user.username,
-            postDescription: post.description,
-            postPhoto:  'https://firebasestorage.googleapis.com/v0/b/instagram-clone-fa3ee.appspot.com/o/jobim%20e%20joao%20gilberto.jpg?alt=media&token=d49e4993-176c-48d3-bcb3-704c1a5ec9ea'
-        }
+        try{
+            const { post, user } = getState()
+            const id = uuid.v4()
+            const upload = {
+                id: id,
+                uid: user.uid,
+                photo: user.photo,
+                username: user.username,
+                postDescription: post.description,
+                postPhoto: post.photo
+            }
 
-        const ref = await db.collection('post').doc()
-        console.log('>>ref ', ref)
-        upload.id = ref.id
-        ref.set(upload)
-    } catch(e){
-        alert(e)
-    }
+        db.collection('post').doc(id).set(upload)
+        
+        } catch(e){
+            alert(e)
+        }
     } 
 }
 
