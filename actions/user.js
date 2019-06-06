@@ -18,6 +18,10 @@ export const updateBio = (bio) => {
     return {type: 'UPDATE_BIO', payload: bio}
 }
 
+export const updatePhoto = (photo) => {
+    return {type: 'UPDATE_PHOTO', payload: photo}
+}
+
 export const login = () =>{
     return async (dispatch, getState) => {
     const {email, password} = getState().user
@@ -97,6 +101,21 @@ export const signup = () =>{
 
         dispatch({type: 'LOGIN', payload: user}) //dispatch the new user object insted of firebase object for global redux state handler
     }
+    } catch(e){
+        alert(e)
+    }
+    } 
+}
+
+export const updateUser = () =>{
+    return async (dispatch, getState) => {
+    try{
+        const {uid, photo, username, bio} = getState().user
+        db.collection('user').doc(uid).update({
+            username: username,
+            bio: bio,
+            photo: photo
+        })    
     } catch(e){
         alert(e)
     }

@@ -4,6 +4,7 @@ import CameraScreen from '../screens/Camera'
 import SearchScreen from '../screens/Search'
 import PostScreen from '../screens/Post'
 import ProfileScreen from '../screens/Profile'
+import EditScreen from '../screens/SignUp'
 import ActivityScreen from '../screens/Activity'
 import MapScreen from '../screens/Map'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
@@ -83,6 +84,18 @@ export const ProfileNavigator = createAppContainer(createStackNavigator(
             navigationOptions: {
                 title: 'Profile'
             } 
+        },
+
+        Edit: {
+            screen: EditScreen,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Edit Profile',
+                headerLeft: (
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Ionicons style={styles.icon} name={'ios-arrow-back'} size={30}/>
+                    </TouchableOpacity>
+                )
+            })
         }
     }
 ))

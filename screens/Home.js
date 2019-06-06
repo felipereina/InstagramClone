@@ -34,12 +34,14 @@ class Home extends Component {
       <View style={styles.container}>
         <FlatList
           data = {this.props.post.feed}
-          renderItem = {({item}) => (
+          renderItem = {({item}) => {
+            const liked = item.likes.includes(this.props.user.uid)
+            return (
             <View>
               <View style={[styles.row, styles.center]}>
                 <View style={[styles.row, styles.center]}>
                   <Image style={styles.roundImage} source={{uri: item.photo}} />
-                  <Text>{item.username}</Text>
+                  <Text>{item.username} -</Text> 
                   <View>
                     <TouchableOpacity onPress={() => this.navigateMap(item)}>
                       <Text>{item.postLocation ? item.postLocation.name : null}</Text>
@@ -52,7 +54,7 @@ class Home extends Component {
               <Image style={styles.postPhoto} source={{uri: item.postPhoto}} />
               </TouchableOpacity>
               <View style={styles.row}>
-                <Ionicons style={{margin: 5}} name={item.likes.includes(this.props.user.uid) ? 'ios-heart' : 'ios-heart-empty'} size={25}/>
+                <Ionicons style={{margin: 5}} color={liked ? '#db565b' : '#000'} name={liked ? 'ios-heart' : 'ios-heart-empty'} size={25}/>
                 <Ionicons style={{margin: 5}} name='ios-chatbubbles' size={25}/>
                 <Ionicons style={{margin: 5}} name='ios-send' size={25}/>
               </View>
@@ -60,7 +62,7 @@ class Home extends Component {
               <Text>{item.postDescription}</Text>
 
             </View>
-          )}
+            )}}
         />
       </View>
     );
