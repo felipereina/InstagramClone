@@ -26,7 +26,8 @@ export const uploadPost = () =>{
                 username: user.username,
                 postDescription: post.description,
                 postPhoto: post.photo,
-                postLocation: post.location
+                postLocation: post.location,
+                likes: []
             }
 
         db.collection('post').doc(id).set(upload)
@@ -51,5 +52,34 @@ export const getPosts = () =>{
     } catch(e){
         alert(e)
     }
+    } 
+}
+
+export const likePost = (post) =>{
+    return async (dispatch, getState) => {
+        const { uid } = getState().user
+        try{
+            db.collection('post').doc(post.id).update({
+                likes: firebase.firestore.FieldValue.arrayUnion(uid) //similar to array.push in firestore
+            })
+            dispatch(getPosts())
+        } catch(e){
+            alert(e)
+        }
+    } 
+}
+
+
+export const unlikePost = (post) =>{
+    return async (dispatch, getState) => {
+        const { uid } = getState().user
+        try{
+            db.collection('post').doc(post.id).update({
+                likes: firebase.firestore.FieldValue.arrayRemove(uid) //similar to array.pop in firestore
+            })
+            dispatch(getPosts())
+        } catch(e){
+            alert(e)
+        }
     } 
 }

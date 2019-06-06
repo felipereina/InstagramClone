@@ -3,16 +3,26 @@ import { Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getPosts } from '../actions/post'
+import { getPosts, likePost, unlikePost } from '../actions/post'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 class Home extends Component {
-  
+
   componentDidMount= () =>{
     this.props.getPosts();
   }
+  
+  likePost = (post) => {
+    const { uid } = this.props.user
+    if(post.likes.includes(uid)){
+      this.props.unlikePost(post)
+    } else{
+      this.props.likePost(post)
+    }
 
+  }
+  
   navigateMap = (item) => {
     this.props.navigation.navigate('Map',
      { location: item.postLocation })
@@ -38,10 +48,11 @@ class Home extends Component {
                 </View>
                 <Ionicons style={{margin: 5}} name='ios-flag' size={25}/>
               </View>
+              <TouchableOpacity onPress={() => this.likePost(item)}>
               <Image style={styles.postPhoto} source={{uri: item.postPhoto}} />
-              
+              </TouchableOpacity>
               <View style={styles.row}>
-                <Ionicons style={{margin: 5}} name='ios-heart' size={25}/>
+                <Ionicons style={{margin: 5}} name={item.likes.includes(this.props.user.uid) ? 'ios-heart' : 'ios-heart-empty'} size={25}/>
                 <Ionicons style={{margin: 5}} name='ios-chatbubbles' size={25}/>
                 <Ionicons style={{margin: 5}} name='ios-send' size={25}/>
               </View>
@@ -57,11 +68,14 @@ class Home extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getPosts }, dispatch)
+    return bindActionCreators({ getPosts, likePost, unlikePost }, dispatch)
 }
 
 const mapStateToProps = (state) => {
-    return { post: state.post }
+    return { 
+      post: state.post,
+      user: state.user
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
