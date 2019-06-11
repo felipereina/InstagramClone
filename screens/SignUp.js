@@ -42,10 +42,10 @@ class SignUp extends Component {
   render() {
     const { routeName } = this.props.navigation.state
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.center]}>
         <TouchableOpacity style={styles.center} onPress={this.openLibrary} >
           <Image style={styles.roundImage} source={{uri: this.props.user.photo}}/>
-          <Text style={styles.bold}>Upload Photo</Text>
+          <Text>Upload Photo</Text>
         </TouchableOpacity>
         <TextInput
           style={styles.border}

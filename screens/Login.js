@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -22,7 +22,8 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.center]}>
+        <Image style={{width: 300, height: 100}} source={require('../assets/logo.jpg')} />
         <TextInput 
             style={styles.border}
             value={this.props.user.email}
@@ -39,10 +40,10 @@ class Login extends Component {
          <TouchableOpacity style={styles.button} onPress={() => this.props.login()}>
             <Text>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.facebookbutton} onPress={() => this.props.facebookLogin()}>
+        <TouchableOpacity style={styles.facebookButton} onPress={() => this.props.facebookLogin()}>
             <Text>Facebook Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Signup')}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
             <Text>SignUp</Text>
         </TouchableOpacity>
       </View>

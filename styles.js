@@ -5,19 +5,48 @@ export default styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     center: {
       alignItems: 'center',
+      justifyContent: 'center',
+    },
+    space: {
+      alignItems: 'center',
       justifyContent: 'space-between',
+    },
+    left: {
+      alignItems: 'flex-start',
+    },
+    right: {
+      alignItems: 'flex-end',
     },
     row: {
       flexDirection: 'row'
     },
-    facebookbutton: {
+    bold: {
+      fontWeight: 'bold',
+    },
+    white: {
+      color: '#fff',
+    },
+    gray: {
+      color: '#adadad',
+    },
+    small: {
+      fontSize: 10,
+    },
+    input: {
+      width: width*.90,
+      margin: 15,
+      padding: 15,
+      alignSelf: 'center',
+      borderColor: '#d3d3d3',
+      borderWidth: 1,
+      borderRadius: 50,
+      fontSize: 16,
+    },
+    facebookButton: {
       backgroundColor: '#3b5998',
-      color: 'white',
       marginTop: 20,
       paddingVertical: 10,
       alignItems: 'center',

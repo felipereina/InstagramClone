@@ -2,6 +2,8 @@ import firebase from 'firebase'
 import db from '../config/firebase'
 import uuid from 'uuid'
 import cloneDeep from 'lodash/cloneDeep'
+import orderBy from 'lodash/orderBy'
+
 
 
 export const updateDescription = (input) => {
@@ -29,13 +31,14 @@ export const uploadPost = () =>{
                 postDescription: post.description || ' ',
                 postPhoto: post.photo,
                 postLocation: post.location || ' ',
-                likes: []
+                likes: [],
+                comments: []
             }
 
         db.collection('post').doc(id).set(upload)
         
         } catch(e){
-            alert(e)
+            console.error(e)
         }
     } 
 }
@@ -52,7 +55,7 @@ export const getPosts = () =>{
 
         dispatch({type: 'GET_POSTS', payload: array})
     } catch(e){
-        alert(e)
+        console.error(e)
     }
     } 
 }
@@ -88,7 +91,7 @@ export const likePost = (post) =>{
             dispatch({type: 'GET_POSTS', payload: newFeed})
             //dispatch(getPosts())
         } catch(e){
-            alert(e)
+            console.error(e)
         }
     } 
 }
@@ -109,7 +112,47 @@ export const unlikePost = (post) =>{
 
             dispatch(getPosts())
         } catch(e){
-            alert(e)
+            console.error(e)
         }
     } 
 }
+
+export const addComment = (text, post) =>{
+    return async (dispatch, getState) => {
+        const { uid, photo, username } = getState().user
+        let comments = cloneDeep(getState().post.comments.reverse())
+        try{
+            const comment = {
+                comment: text,
+                commenterId: uid,
+                commenterPhoto: photo || '',
+                commenterName: username,
+                date: new Date().getTime(),
+            }
+            db.collection('post').doc(post.id).update({
+                comments: firebase.firestore.FieldValue.arrayUnion(comment) //similar to array.push in firestore
+            })
+            
+            comment.postId = post.id
+            comment.postPhoto = post.postPhoto
+            comment.uid = post.uid
+            comment.type = 'COMMENT'
+            comments.push(comment)
+            dispatch({ type: 'GET_COMMENTS', payload: comments.reverse() })
+
+            db.collection('activity').doc().set(comment)
+        } catch(e){
+            console.error(e)
+        }
+    } 
+}
+
+export const getComments = (post) =>{
+    return dispatch => {
+        dispatch({ type: 'GET_COMMENTS', payload: orderBy(post.comments, 'date', 'desc')})
+    }
+
+}
+
+
+

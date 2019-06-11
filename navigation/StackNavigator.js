@@ -7,6 +7,7 @@ import ProfileScreen from '../screens/Profile'
 import EditScreen from '../screens/SignUp'
 import ActivityScreen from '../screens/Activity'
 import MapScreen from '../screens/Map'
+import CommentScreen from '../screens/Comment'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Image, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -30,6 +31,17 @@ export const HomeNavigator = createAppContainer(createStackNavigator(
                 
             })
         },
+        Comment: {
+            screen: CommentScreen,
+            navigationOptions: ({ navigation }) => ({
+              title: 'Comments',
+              headerLeft: (
+                <TouchableOpacity onPress={() => navigation.goBack()} >
+                  <Ionicons style={styles.icon} name={'ios-arrow-back'} size={30}/>
+                </TouchableOpacity>
+              )
+            })
+          },
 
         Map:{
             screen: MapScreen, 
@@ -60,6 +72,9 @@ HomeNavigator.navigationOptions = ({navigation}) => {
     if(navigation.state.routes.some(route => route.routeName === 'Map')){
         tabBarVisible = false
     }
+    if (navigation.state.routes.some(route => route.routeName === 'Comment')) {
+        tabBarVisible = false
+      }
     return {
         tabBarVisible
     }
