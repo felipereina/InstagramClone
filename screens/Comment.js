@@ -4,6 +4,8 @@ import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addComment, getComments } from '../actions/post'
+import moment from 'moment'
+
 
 class Comment extends Component {
   
@@ -34,6 +36,7 @@ class Comment extends Component {
                         <View style={[styles.container, styles.left]}>
                             <Text>{item.commenterName}</Text>
                             <Text>{item.comment}</Text>
+                            <Text style={[styles.gray, styles.small]}>{moment(item.date).format('ll')}</Text>
                         </View>
                     </View>
                     )} />

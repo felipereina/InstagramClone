@@ -77,6 +77,12 @@ export default styles = StyleSheet.create({
       backgroundColor: '#adadad'
 
     },
+    squareLarge: {
+      width: width*.33, 
+      height: 125,
+      margin: 1,
+      backgroundColor: '#d3d3d3'
+    },
     cameraButton: {
       height: 100, 
       width: 100,

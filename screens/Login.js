@@ -12,11 +12,11 @@ class Login extends Component {
     componentDidMount = () =>{
       firebase.auth().onAuthStateChanged((user) => {
         if(user){
-          this.props.getUser(user.uid)
+          this.props.getUser(user.uid, 'LOGIN')
           if(this.props.user != null){
             this.props.navigation.navigate('Home')
           }
-        }
+        }``
       })
     }
 

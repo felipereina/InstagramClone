@@ -1,19 +1,39 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux'
 
 const user = (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN':
       return action.payload
     case 'UPDATE_EMAIL':
-      return {...state, email: action.payload}
+      return { ...state, email: action.payload }
     case 'UPDATE_PASSWORD':
-      return {...state, password: action.payload}
+      return { ...state, password: action.payload }
     case 'UPDATE_USERNAME':
-      return {...state, username: action.payload}
+      return { ...state, username: action.payload }
     case 'UPDATE_BIO':
-      return {...state, bio: action.payload}
+      return { ...state, bio: action.payload }
     case 'UPDATE_PHOTO':
-      return {...state, photo: action.payload}
+      return { ...state, photo: action.payload }
+    case 'GET_TOKEN': 
+      return { ...state, token: action.payload }
+    default:
+      return state
+  }
+}
+
+const profile = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_PROFILE':
+      return action.payload
+    default:
+      return state
+  }
+}
+
+const messages = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_MESSAGES':
+      return action.payload
     default:
       return state
   }
@@ -21,14 +41,14 @@ const user = (state = {}, action) => {
 
 const post = (state = null, action) => {
   switch (action.type) {
-    case 'UPDATE_DESCRIPTION':
-      return {...state, description: action.payload}
-    case 'UPDATE_LOCATION':
-      return {...state, location: action.payload}
     case 'UPDATE_PHOTO':
-      return {...state, photo: action.payload}
+      return { ...state, photo: action.payload }
+    case 'UPDATE_DESCRIPTION':
+      return { ...state, description: action.payload }
+    case 'UPDATE_LOCATION':
+      return { ...state, location: action.payload }
     case 'GET_POSTS':
-      return {...state, feed: action.payload}
+      return { ...state, feed: action.payload }
     case 'GET_COMMENTS': 
       return { ...state, comments: action.payload }
     default:
@@ -47,8 +67,12 @@ const modal = (state = null, action) => {
   }
 }
 
-export default combineReducers({
-  user, 
+const rootReducer = combineReducers({
+	user,
   post,
-  modal
+  modal,
+  profile,
+  messages
 })
+
+export default rootReducer

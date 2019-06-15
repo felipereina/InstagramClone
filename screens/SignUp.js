@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
 import styles from '../styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateEmail, updatePassword, updateUserName, updateBio, signup, updateUser, updatePhoto } from '../actions/user'
-import { uploadPhoto } from '../actions'
 import { ImagePicker, Permissions } from 'expo';
-import firebase from 'firebase'
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { updatePhoto, updateEmail, updatePassword, updateUsername, updateBio, signup, updateUser } from '../actions/user'
+import { uploadPhoto } from '../actions'
 
-class SignUp extends Component {
-
-  componentDidMount = () => {
-    const { routeName } = this.props.navigation.state
-    console.log(routeName)
-  }
+class SignUp extends React.Component {
 
   onPress = () => {
     const { routeName } = this.props.navigation.state
@@ -24,18 +18,16 @@ class SignUp extends Component {
       this.props.updateUser()
       this.props.navigation.goBack()
     }
-
   }
 
   openLibrary = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
-    if(status === 'granted'){
-        const image = await ImagePicker.launchImageLibraryAsync({allowsEditing: true})
-        if(!image.cancelled){
-          const url = await this.props.uploadPhoto(image)
-          this.props.updatePhoto(url)
-          console.log(url)
-        }
+    if (status === 'granted') {
+      const image = await ImagePicker.launchImageLibraryAsync()
+      if(!image.cancelled ){
+        const url = await this.props.uploadPhoto(image)
+        this.props.updatePhoto(url)
+      }
     }
   }
 
@@ -65,7 +57,7 @@ class SignUp extends Component {
         <TextInput
         	style={styles.border}
         	value={this.props.user.username}
-        	onChangeText={input => this.props.updateUserName(input)}
+        	onChangeText={input => this.props.updateUsername(input)}
         	placeholder='Username'
         />
         <TextInput
@@ -83,11 +75,13 @@ class SignUp extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ updatePhoto, uploadPhoto, updateUser, updateEmail, updatePassword, updateUserName, updateBio, signup }, dispatch)
+  return bindActionCreators({ updatePhoto, uploadPhoto, updateUser, updateEmail, updatePassword, updateUsername, updateBio, signup }, dispatch)
 }
 
 const mapStateToProps = (state) => {
-    return { user: state.user}
+  return {
+    user: state.user
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

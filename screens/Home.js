@@ -66,9 +66,7 @@ class Home extends Component {
                 </TouchableOpacity>
                 <Ionicons style={{margin: 5}} name='ios-send' size={25}/>
               </View>
-
               <Text>{item.postDescription}</Text>
-
             </View>
             )}}
         />
