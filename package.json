@@ -11,6 +11,9 @@
     "@shoutem/ui": "^0.23.16",
     "expo": "^32.0.0",
     "firebase": "^6.0.2",
+    "lodash": "^4.17.15",
+    "mem": "^5.1.1",
+    "mixin-deep": "^2.0.1",
     "react": "16.6.3",
     "react-native": "^0.57.1",
     "react-navigation": "3.7.1",
@@ -18,6 +21,7 @@
     "redux": "4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "2.3.0",
+    "set-value": "^3.0.1",
     "uuid": "3.3.2"
   },
   "devDependencies": {
